@@ -1,0 +1,7 @@
+[build]
+  command = "ng build --base-href=/"
+  publish = "dist/collage-amor"
+
+[[plugins]]
+  package = "@netlify/angular-runtime"
+  inputs = { disabled = true }
