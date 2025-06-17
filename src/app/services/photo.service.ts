@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
-  private API = 'http://localhost:8080/api/photos';
+  private readonly API = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
