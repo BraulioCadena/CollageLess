@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { Photo } from '../../photo.model';
+
 @Component({
   selector: 'app-gallery',
   standalone: true,
@@ -9,18 +11,21 @@ import { Photo } from '../../photo.model';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss']
 })
-export class GalleryComponent {
-  images: string[] = [];
+export class GalleryComponent implements OnInit {
+  photos: Photo[] = [];
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {
-    this.http.get<Photo[]>('http://localhost:8080/api/photos').subscribe({
-      next: (photos) => {
-        this.images = photos.map(photo => `http://localhost:8080${photo.url}`);
+  ngOnInit(): void {
+    this.http.get<Photo[]>(`${environment.apiUrl}/photos`).subscribe({
+      next: (data) => {
+        this.photos = data.map(photo => ({
+          ...photo,
+          url: `${environment.apiUrl}${photo.url}`
+        }));
       },
       error: (err) => {
-        console.error('Error al obtener imágenes:', err);
+        console.error('Error cargando fotos:', err);
       }
     });
   }

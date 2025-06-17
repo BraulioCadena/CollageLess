@@ -2,8 +2,15 @@
   <h2 class="text-xl font-semibold text-pink-700 mb-4 text-center">Nuestra galería 💑</h2>
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    <div *ngFor="let img of images" class="overflow-hidden rounded-lg shadow-md">
-      <img [src]="img" alt="Imagen" class="w-full h-48 object-cover transition-transform hover:scale-105 duration-200">
+    <div
+      *ngFor="let photo of photos"
+      class="overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+    >
+      <img
+        [src]="photo.url"
+        alt="{{ photo.fileName }}"
+        class="w-full h-48 object-cover transition-transform hover:scale-105 duration-300"
+      />
     </div>
   </div>
 </div>
