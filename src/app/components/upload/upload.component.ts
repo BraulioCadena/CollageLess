@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
+  @Output() fotoSubida = new EventEmitter<void>(); // 👈 aquí debe ir
+
   selectedFile: File | null = null;
   uploadMessage: string = '';
   mostrarCarta = false;
@@ -29,9 +31,9 @@ export class UploadComponent {
     fetch('https://angularless.onrender.com/api/photos/upload', {
       method: 'POST',
       body: formData,
-      headers:{
-      Accept: 'application/json' // 👈 opcional pero recomendado
-    }
+      headers: {
+        Accept: 'application/json'
+      }
     })
     .then(response => {
       if (!response.ok) throw new Error('Error en el servidor');
@@ -40,7 +42,7 @@ export class UploadComponent {
     .then(photo => {
       this.uploadMessage = '¡Foto subida con éxito!';
       this.selectedFile = null;
-      // Aquí podrías emitir un evento o actualizar la galería directamente
+      this.fotoSubida.emit(); // 👈 emitimos el evento correctamente
     })
     .catch(error => {
       console.error('Error al subir imagen:', error);
