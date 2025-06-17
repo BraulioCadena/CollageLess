@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { Photo } from '../../photo.model';
 
 @Component({
@@ -17,12 +16,9 @@ export class GalleryComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<Photo[]>(`${environment.apiUrl}/photos`).subscribe({
+    this.http.get<Photo[]>('https://angularless.onrender.com/api/photos').subscribe({
       next: (data) => {
-        this.photos = data.map(photo => ({
-          ...photo,
-          url: `${environment.apiUrl}${photo.url}`
-        }));
+        this.photos = data; // 🔥 Cloudinary ya da la URL completa
       },
       error: (err) => {
         console.error('Error cargando fotos:', err);
