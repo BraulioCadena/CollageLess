@@ -18,8 +18,10 @@ interface Photo {
 export class PhotoCollageComponent implements OnInit {
   photos: Photo[] = [];
   selectedFile!: File;
+  uploadMessage = '';
+  mostrarCarta = false;
 
-  constructor(private photoService: PhotoService) { }
+  constructor(private photoService: PhotoService) {}
 
   ngOnInit(): void {
     this.loadPhotos();
@@ -34,15 +36,16 @@ export class PhotoCollageComponent implements OnInit {
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
-  upload(): void {
+
+  uploadImage(): void {
     if (this.selectedFile) {
       this.photoService.upload(this.selectedFile).subscribe((photo) => {
         this.photos.push(photo);
         this.selectedFile = undefined!;
+        this.uploadMessage = '📸 Foto subida con éxito';
       });
     }
   }
-
 
   deletePhoto(id: number): void {
     this.photoService.deletePhoto(id).subscribe(() => {
