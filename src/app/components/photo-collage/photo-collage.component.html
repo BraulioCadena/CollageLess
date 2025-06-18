@@ -1,3 +1,11 @@
+<div class="upload-box">
+  <input type="file" (change)="onFileSelected($event)">
+  <button (click)="upload()">Subir imagen</button>
+</div>
+
 <div class="collage-background">
-  <img *ngFor="let photo of photos" [src]="photoUrl(photo.name)" />
+  <div class="collage-item" *ngFor="let photo of photos">
+    <img [src]="photo.url" [alt]="photo.filename">
+    <button (click)="deletePhoto(photo.id)">Eliminar</button>
+  </div>
 </div>

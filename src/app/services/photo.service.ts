@@ -10,6 +10,11 @@ export class PhotoService {
   getAllPhotos() {
     return this.http.get<any[]>(this.API);
   }
+   upload(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post<any>(`${this.API}/upload`, formData);
+  }
 
   deletePhoto(id: number) {
     return this.http.delete(`${this.API}/${id}`);
