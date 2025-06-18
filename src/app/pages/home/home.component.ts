@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { GalleryComponent } from '../../components/gallery/gallery.component';
-import { UploadComponent } from '../../components/upload/upload.component';
 @Component({
   selector: 'app-home',
-  imports: [UploadComponent, GalleryComponent, GalleryComponent],
+  imports: [GalleryComponent, GalleryComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
