@@ -1,11 +1,16 @@
-<div class="upload-box">
-  <input type="file" (change)="onFileSelected($event)">
-  <button (click)="upload()">Subir imagen</button>
-</div>
-
-<div class="collage-background">
-  <div class="collage-item" *ngFor="let photo of photos">
-    <img [src]="photo.url" [alt]="photo.filename">
-    <button (click)="deletePhoto(photo.id)">Eliminar</button>
-  </div>
+<div class="flex items-center gap-4">
+  <label class="bg-pink-600 text-white px-4 py-2 rounded cursor-pointer hover:bg-pink-700 transition">
+    Seleccionar imagen
+    <input 
+      type="file" 
+      (change)="onFileSelected($event)" 
+      class="hidden"
+    >
+  </label>
+  <button 
+    (click)="upload()" 
+    class="bg-white border border-pink-600 text-pink-600 px-4 py-2 rounded hover:bg-pink-50 transition"
+  >
+    Subir imagen
+  </button>
 </div>
