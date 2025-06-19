@@ -10,13 +10,14 @@ export interface Photo {
 
 @Injectable({ providedIn: 'root' })
 export class PhotoService {
+  // ⚠️ Asegúrate de que environment.apiUrl sea: 'https://angularless.onrender.com/api/photos'
   private readonly API = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   // Obtener todas las fotos desde el backend (Cloudinary)
   getAllPhotos() {
-    return this.http.get<Photo[]>(this.API);
+    return this.http.get<Photo[]>(`${this.API}`);
   }
 
   // Subir una nueva imagen a Cloudinary
