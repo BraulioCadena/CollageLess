@@ -12,8 +12,7 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     CommonModule,
     NavbarComponent,
-    HeartsComponent,
-    PhotoCollageComponent
+    HeartsComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
