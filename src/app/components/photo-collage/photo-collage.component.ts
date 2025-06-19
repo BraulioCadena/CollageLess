@@ -36,16 +36,16 @@ export class PhotoCollageComponent implements OnInit {
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
   }
-
-  uploadImage(): void {
-    if (this.selectedFile) {
-      this.photoService.upload(this.selectedFile).subscribe((photo) => {
-        this.photos.push(photo);
-        this.selectedFile = undefined!;
-        this.uploadMessage = '📸 Foto subida con éxito';
-      });
-    }
+uploadImage(): void {
+  if (this.selectedFile) {
+    this.photoService.upload(this.selectedFile).subscribe((photo) => {
+      this.photos.push(photo); // photo.url debe venir con la imagen de Cloudinary
+      this.selectedFile = undefined!;
+      this.uploadMessage = '📸 Foto subida con éxito';
+    });
   }
+}
+
 
   deletePhoto(id: number): void {
     this.photoService.deletePhoto(id).subscribe(() => {
