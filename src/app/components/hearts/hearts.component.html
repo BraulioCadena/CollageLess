@@ -1,3 +1,5 @@
-<div class="barra-dedicada">
-  💖 PARA MI PRINCESA LESLY 💖
+<div class="hearts-container">
+  <div class="heart" *ngFor="let h of hearts" [ngStyle]="{'left': h.left + '%', 'animation-delay': h.delay + 's'}">
+    ❤️
+  </div>
 </div>
