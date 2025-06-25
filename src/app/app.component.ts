@@ -10,8 +10,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterModule,
     CommonModule,
-    NavbarComponent,
-    HeartsComponent
+    NavbarComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
