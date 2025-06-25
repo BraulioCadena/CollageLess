@@ -1,3 +1,10 @@
-:host {
-  width: 100%;
+.barra-dedicada {
+  background-color: rgba(255, 192, 203, 0.3); // rosa claro y transparente
+  backdrop-filter: blur(4px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
 }
