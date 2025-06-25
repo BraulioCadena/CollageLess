@@ -1,40 +1,31 @@
-<!-- Fondo tipo collage -->
-<div class="fixed inset-0 -z-10 grid grid-cols-3 gap-2 opacity-20 blur-sm p-4">
+<!-- Fondo collage -->
+<div class="fixed inset-0 -z-10 grid grid-cols-3 gap-3 p-6 overflow-auto bg-white/80">
   <img *ngFor="let photo of photos" [src]="photo.url" [alt]="photo.filename"
     class="w-full h-auto object-cover rounded-lg shadow" />
 </div>
 
-<!-- Contenido principal -->
-<div class="bg-white p-6 rounded-2xl shadow-xl max-w-md mx-auto text-center border border-pink-100 z-10 relative">
-  <h2 class="text-2xl font-bold text-pink-700 mb-6 tracking-wide">
-    Sube una foto cabeza hueca 📸
-  </h2>
+<!-- Contenedor principal -->
+<div class="relative z-10 p-6 max-w-lg mx-auto text-center bg-white/90 rounded-xl shadow-lg">
+  <h2 class="text-2xl font-bold text-pink-600 mb-4">💖 Galería para mi princesa 💖</h2>
 
-  <input type="file" (change)="onFileSelected($event)" class="file:mr-4 file:py-2 file:px-4
-           file:rounded-full file:border-0
-           file:text-sm file:font-semibold
-           file:bg-pink-100 file:text-pink-700
-           hover:file:bg-pink-200 mb-4 w-full text-sm" />
+  <!-- Subida de imagen -->
+  <input type="file" (change)="onFileSelected($event)" class="mb-4" />
+  <button (click)="uploadImage()"
+    class="bg-pink-500 hover:bg-pink-600 text-white font-semibold px-4 py-2 rounded-full mb-2 disabled:opacity-50"
+    [disabled]="!selectedFile">
+    📤 Subir Imagen
+  </button>
+  <div class="text-sm text-gray-700 mb-2">{{ uploadMessage }}</div>
 
-  <button
-    class="w-full bg-pink-500 hover:bg-pink-600 transition-colors text-white font-semibold py-2 px-4 rounded-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
-    (click)="uploadImage()" [disabled]="!selectedFile">
-    📤 Subir Foto
+  <!-- Botón para mostrar carta -->
+  <button (click)="toggleCard()"
+    class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 rounded-full mt-4">
+    💌 Carta para mi amor
   </button>
 
-  <button
-    class="mt-4 bg-pink-200 text-pink-900 font-semibold px-4 py-2 rounded-xl shadow-md hover:bg-pink-300 transition"
-    (click)="mostrarCarta = true">
-    💌 Carta para mi amor 💌
-
-  </button>
-
-  <!-- Carta romántica -->
-  <div *ngIf="mostrarCarta" class="carta-romantica mt-6 mx-auto max-w-xl p-6">
-    <h2 class="text-2xl font-bold text-pink-700 mb-2 text-center">LESLY 💖</h2>
-    <p class="text-gray-800 leading-relaxed whitespace-pre-line text-justify">
-      💌 Carta para Lesly 💌
-
+  <!-- Carta -->
+  <div *ngIf="showCard" class="mt-6 bg-pink-100 p-4 rounded-lg shadow-inner text-left">
+    <h3 class="text-xl font-bold text-pink-700 mb-2">
       Hola amor Quería saber cómo te sientes, te extraño demasiado, no me gustaría perderte. Sinceramente me sigues
       enamorando pero, ya sabes, cualquier cosa me puedes decir... A mí la verdad me gusta estar a tu lado: tus ojos, tu
       cara, tus gestos... Todo me gusta de ti. No quiero rendirme ante los malos ratos, los contratiempos, los
@@ -53,11 +44,7 @@
       como tu sonrisa mi amor...
 
       Gracias por leer
-      — Braulio 🌹
-    </p>
+      — Braulio 🌹❤️</h3>
+    <p class="text-pink-800">Cada foto aquí es un recuerdo de cuánto te amo. Gracias por existir, Lesly 💕</p>
   </div>
-
-  <p *ngIf="uploadMessage" class="mt-4 text-sm text-green-600">
-    {{ uploadMessage }}
-  </p>
 </div>
