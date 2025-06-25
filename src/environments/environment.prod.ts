@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://angularlessbcakend.onrender.com/api/photos'
+  apiUrl: 'https://angularlessbcakend.onrender.com/api'
 };
