@@ -33,7 +33,7 @@ export class PhotoCollageComponent implements OnInit {
 
   onFilesSelected(event: any): void {
     const files = Array.from(event.target.files) as File[];
-    if (files && files.length > 0) {
+    if (files.length > 0) {
       this.selectedFiles = files;
       this.uploadMessage = '';
     }
@@ -53,10 +53,10 @@ export class PhotoCollageComponent implements OnInit {
       .then(() => {
         this.uploadMessage = '📸 ¡Todas las fotos fueron subidas con éxito!';
         this.selectedFiles = [];
-        this.loadPhotos(); // recarga el collage
+        this.loadPhotos();
       })
       .catch((err) => {
-        console.error('Error al subir una o más imágenes:', err);
+        console.error('Error al subir imágenes:', err);
         this.uploadMessage = '❌ Error al subir algunas imágenes.';
       })
       .finally(() => {
@@ -64,14 +64,16 @@ export class PhotoCollageComponent implements OnInit {
       });
   }
 
-  toggleCard(): void {
-    this.showCard = !this.showCard;
-  }
-
   deletePhoto(id: number): void {
+    if (!confirm('¿Seguro que quieres eliminar esta foto?')) return;
+
     this.photoService.deletePhoto(id).subscribe({
       next: () => this.photos = this.photos.filter(p => p.id !== id),
       error: (err) => console.error('Error al eliminar imagen:', err)
     });
+  }
+
+  toggleCard(): void {
+    this.showCard = !this.showCard;
   }
 }

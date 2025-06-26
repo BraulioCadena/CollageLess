@@ -1,5 +1,5 @@
 .collage-background {
-  position: absolute; /* ✅ Ya no fixed */
+  position: absolute;
   top: 0;
   left: 0;
   z-index: -10;
@@ -12,8 +12,8 @@
   padding: 10px;
   background-color: white;
   opacity: 0.15;
-  overflow-y: auto; /* ✅ para que las imágenes hagan scroll si hay muchas */
-  pointer-events: none;
+  overflow-y: auto;
+  pointer-events: auto;
 }
 
 .collage-background img {
@@ -21,4 +21,9 @@
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.collage-background img:hover {
+  transform: scale(1.05);
 }

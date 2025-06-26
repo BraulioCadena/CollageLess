@@ -1,11 +1,17 @@
-<!-- Fondo de collage -->
+<!-- Fondo tipo collage -->
 <div class="collage-background">
-  <img *ngFor="let photo of photos" [src]="photo.url" alt="Foto collage" />
+  <div class="relative group" *ngFor="let photo of photos">
+    <img [src]="photo.url" alt="Foto collage" />
+    <button
+      (click)="deletePhoto(photo.id)"
+      class="absolute top-1 right-1 bg-red-600 text-white rounded-full px-2 py-1 text-xs opacity-0 group-hover:opacity-100 transition"
+      title="Eliminar"
+    >❌</button>
+  </div>
 </div>
 
-<!-- Contenedor que ocupa toda la pantalla y centra el contenido -->
-<div class="fixed inset-0 z-10 flex items-center justify-center overflow-hidden px-4">
-  <!-- Caja interna con altura fija y scroll interno si lo necesita -->
+<!-- Contenedor principal centrado -->
+<div class="fixed inset-0 z-10 flex items-center justify-center px-4">
   <div
     class="w-full max-w-xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-6 text-center 
            max-h-[95vh] overflow-y-auto"
@@ -14,25 +20,24 @@
 
     <!-- Subida de imagen -->
     <div class="flex flex-col items-center space-y-4 mb-6">
-   <label
-  class="cursor-pointer bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow transition duration-200 inline-block w-full max-w-xs text-center"
->
-  📷 Elegir Foto(s)
-  <input type="file" (change)="onFilesSelected($event)" class="hidden" multiple />
-</label>
+      <label
+        class="cursor-pointer bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow w-full max-w-xs"
+      >
+        📷 Elegir Foto(s)
+        <input type="file" (change)="onFilesSelected($event)" multiple class="hidden" />
+      </label>
 
-<button
-  (click)="uploadImages()"
-  [disabled]="!selectedFiles || selectedFiles.length === 0"
-  class="bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white font-bold py-2 px-6 rounded-full shadow transition duration-200 w-full max-w-xs"
->
-  🚀 Subir Imágenes
-</button>
+      <button
+        (click)="uploadImages()"
+        [disabled]="!selectedFiles.length"
+        class="bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white font-bold py-2 px-6 rounded-full shadow w-full max-w-xs"
+      >
+        🚀 Subir Imágenes
+      </button>
 
-<!-- Mensaje de estado -->
-<div *ngIf="uploading" class="text-sm text-pink-700 italic">Subiendo imágenes...</div>
-<div *ngIf="uploadMessage" class="text-sm text-gray-700 italic">{{ uploadMessage }}</div>
-
+      <div *ngIf="uploading" class="text-sm text-pink-700 italic">Subiendo imágenes...</div>
+      <div *ngIf="uploadMessage" class="text-sm text-gray-700 italic">{{ uploadMessage }}</div>
+    </div>
 
     <!-- Botón carta -->
     <button
@@ -51,8 +56,7 @@
         Hola amor, quería saber cómo te sientes...
       </h3>
       <p class="text-sm text-pink-800">
-        <!-- Texto largo aquí -->
-        Hola amor, te extraño demasiado...
+        Hola amor, te extraño demasiado, no me gustaría perderte. ...
       </p>
       <p class="mt-4 text-right text-pink-600 font-semibold">— Braulio 🌹❤️</p>
     </div>
