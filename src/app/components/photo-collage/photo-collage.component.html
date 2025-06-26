@@ -2,11 +2,16 @@
 <div class="collage-background">
   <div class="relative group" *ngFor="let photo of photos">
     <img [src]="photo.url" alt="Foto collage" />
+
+    <!-- Botón eliminar -->
     <button
       (click)="deletePhoto(photo.id)"
-      class="absolute top-1 right-1 bg-red-600 text-white rounded-full px-2 py-1 text-xs opacity-0 group-hover:opacity-100 transition"
-      title="Eliminar"
-    >❌</button>
+      class="absolute top-1 right-1 bg-red-600 text-white rounded-full px-2 py-1 text-xs 
+             opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 sm:opacity-100 transition"
+      title="Eliminar imagen"
+    >
+      ❌
+    </button>
   </div>
 </div>
 
