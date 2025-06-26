@@ -1,45 +1,58 @@
-<!-- Fondo fijo, igual que antes -->
+<!-- Fondo fijo (tu clase) -->
 <div class="collage-background">
   <img *ngFor="let photo of photos" [src]="photo.url" alt="Foto collage" />
 </div>
 
-<!-- Contenedor centrado con altura limitada -->
-<div class="relative z-10 flex flex-col items-center justify-center min-h-[500px] max-h-[80vh] px-4 mx-auto my-12 w-full max-w-xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-6 text-center overflow-auto">
-  <h2 class="text-2xl sm:text-3xl font-bold text-pink-600 mb-4">💖 Galería para mi princesa 💖</h2>
+<!-- Wrapper para centrar todo vertical y horizontal -->
+<div class="relative z-10 flex items-center justify-center min-h-screen px-4">
+  <!-- Contenedor con máximo tamaño y scroll interno -->
+  <div
+    class="w-full max-w-xl bg-white/90 backdrop-blur-md rounded-2xl shadow-2xl p-6 text-center
+           max-h-[90vh] overflow-y-auto"
+  >
+    <h2 class="text-2xl sm:text-3xl font-bold text-pink-600 mb-4">💖 Galería para mi princesa 💖</h2>
 
-  <!-- Subida de imagen -->
-  <div class="flex flex-col items-center space-y-4 mb-6">
-    <label
-      class="cursor-pointer bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow transition duration-200 inline-block w-full max-w-xs text-center">
-      📷 Elegir Foto
-      <input type="file" (change)="onFileSelected($event)" class="hidden" />
-    </label>
+    <!-- Subida de imagen -->
+    <div class="flex flex-col items-center space-y-4 mb-6">
+      <label
+        class="cursor-pointer bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow transition duration-200 inline-block w-full max-w-xs text-center"
+      >
+        📷 Elegir Foto
+        <input type="file" (change)="onFileSelected($event)" class="hidden" />
+      </label>
 
+      <button
+        (click)="uploadImage()"
+        [disabled]="!selectedFile"
+        class="bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white font-bold py-2 px-6 rounded-full shadow transition duration-200 w-full max-w-xs"
+      >
+        🚀 Subir Imagen
+      </button>
+
+      <div class="text-sm text-gray-700 italic">{{ uploadMessage }}</div>
+    </div>
+
+    <!-- Botón carta -->
     <button
-      (click)="uploadImage()"
-      [disabled]="!selectedFile"
-      class="bg-green-500 hover:bg-green-600 disabled:bg-gray-300 text-white font-bold py-2 px-6 rounded-full shadow transition duration-200 w-full max-w-xs">
-      🚀 Subir Imagen
+      (click)="toggleCard()"
+      class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 rounded-full"
+    >
+      💌 Carta para mi amor
     </button>
 
-    <div class="text-sm text-gray-700 italic">{{ uploadMessage }}</div>
-  </div>
-
-  <!-- Botón carta -->
-  <button (click)="toggleCard()"
-    class="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 rounded-full">
-    💌 Carta para mi amor
-  </button>
-
-  <!-- Carta -->
-  <div *ngIf="showCard" class="mt-6 bg-pink-100/80 p-4 rounded-lg shadow-inner text-left max-h-[60vh] overflow-y-auto">
-    <h3 class="text-lg sm:text-xl font-bold text-pink-700 mb-2 leading-relaxed">
-      Hola amor, quería saber cómo te sientes...
-    </h3>
-    <p class="text-sm text-pink-800">
-      <!-- Texto de la carta -->
-      Hola amor Quería saber cómo te sientes, te extraño demasiado...
-    </p>
-    <p class="mt-4 text-right text-pink-600 font-semibold">— Braulio 🌹❤️</p>
+    <!-- Carta -->
+    <div
+      *ngIf="showCard"
+      class="mt-6 bg-pink-100/80 p-4 rounded-lg shadow-inner text-left max-h-[60vh] overflow-y-auto"
+    >
+      <h3 class="text-lg sm:text-xl font-bold text-pink-700 mb-2 leading-relaxed">
+        Hola amor, quería saber cómo te sientes...
+      </h3>
+      <p class="text-sm text-pink-800">
+        <!-- Aquí va tu texto largo -->
+        Hola amor Quería saber cómo te sientes, te extraño demasiado...
+      </p>
+      <p class="mt-4 text-right text-pink-600 font-semibold">— Braulio 🌹❤️</p>
+    </div>
   </div>
 </div>
