@@ -1,3 +1,4 @@
+/* Tu fondo tipo collage fijo */
 .collage-background {
   position: fixed;
   top: 0;
@@ -22,4 +23,11 @@
   border-radius: 10px;
   box-shadow: none;
   transition: none;
+}
+
+/* Global para asegurar centrado vertical */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
