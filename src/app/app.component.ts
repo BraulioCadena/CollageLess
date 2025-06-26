@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeartsComponent } from './components/hearts/hearts.component';
 import { CommonModule } from '@angular/common';
 
@@ -10,7 +9,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterModule,
     CommonModule,
-    NavbarComponent,
     HeartsComponent,
   ],
   templateUrl: './app.component.html',
