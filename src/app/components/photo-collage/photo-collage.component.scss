@@ -1,9 +1,8 @@
-/* Tu fondo tipo collage fijo */
 .collage-background {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -10; /* Más atrás */
+  z-index: -10;
   width: 100vw;
   height: 100vh;
   display: grid;
@@ -12,8 +11,8 @@
   gap: 10px;
   padding: 10px;
   background-color: white;
-  opacity: 0.15; /* Decorativo, sutil */
-  pointer-events: none; /* Para que no interfiera */
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 .collage-background img {
@@ -22,12 +21,11 @@
   object-fit: cover;
   border-radius: 10px;
   box-shadow: none;
-  transition: none;
 }
 
-/* Global para asegurar centrado vertical */
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden; /* 💥 clave para que NO haya scroll global */
 }
