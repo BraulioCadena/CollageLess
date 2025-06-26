@@ -13,9 +13,10 @@ import { Photo } from '../../models/photo.model';
 })
 export class PhotoCollageComponent implements OnInit {
   photos: Photo[] = [];
-  selectedFile!: File;
+  selectedFiles: File[] = [];
   uploadMessage = '';
-  showCard = false; // <-- ESTA LÍNEA FALTABA
+  uploading = false;
+  showCard = false;
 
   constructor(private photoService: PhotoService) {}
 
@@ -30,31 +31,40 @@ export class PhotoCollageComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.selectedFile = file;
+  onFilesSelected(event: any): void {
+    const files = Array.from(event.target.files) as File[];
+    if (files && files.length > 0) {
+      this.selectedFiles = files;
       this.uploadMessage = '';
     }
   }
 
-  uploadImage(): void {
-    if (this.selectedFile) {
-      this.photoService.upload(this.selectedFile).subscribe({
-        next: (photo) => {
-          this.uploadMessage = '📸 ¡Foto subida con éxito!';
-          this.selectedFile = undefined!;
-          this.loadPhotos(); // Refrescar lista
-        },
-        error: (err) => {
-          this.uploadMessage = '❌ Error al subir la imagen';
-          console.error(err);
-        }
+  uploadImages(): void {
+    if (!this.selectedFiles.length) return;
+
+    this.uploading = true;
+    this.uploadMessage = '';
+
+    const uploadTasks = this.selectedFiles.map(file =>
+      this.photoService.upload(file).toPromise()
+    );
+
+    Promise.all(uploadTasks)
+      .then(() => {
+        this.uploadMessage = '📸 ¡Todas las fotos fueron subidas con éxito!';
+        this.selectedFiles = [];
+        this.loadPhotos(); // recarga el collage
+      })
+      .catch((err) => {
+        console.error('Error al subir una o más imágenes:', err);
+        this.uploadMessage = '❌ Error al subir algunas imágenes.';
+      })
+      .finally(() => {
+        this.uploading = false;
       });
-    }
   }
 
-  toggleCard(): void { // <-- ESTE MÉTODO FALTABA
+  toggleCard(): void {
     this.showCard = !this.showCard;
   }
 
